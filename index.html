@@ -24,6 +24,23 @@
 
     
 
-    <script src="abc1.js"></script>
+    <script>
+    function searchShow(a) {
+    //a = "kendra"
+    const url = 'https://vqtv2m1x1h.execute-api.ap-southeast-1.amazonaws.com/default/query?query=' + a;
+    const abc = fetch(url)
+    .then(response => response.json())
+    .then((data) => {
+
+        document.querySelector('#b').innerText = data.DocumentExcerpt.Text;
+        document.querySelector('#e').innerText = data.DocumentURI;
+        document.querySelector('#e').href = data.DocumentURI;
+
+    })
+    .catch(error => {
+        document.querySelector('#d').innerText = data.Type;    
+    });
+}
+    </script>
 </body>
 </html>
