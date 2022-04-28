@@ -2,13 +2,43 @@
 <html lang="en">
 <head>
     <title>Fetch API</title>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.357.0.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+
+//Bucket Configurations
+
+ var bucketName = 'bucketdemo112';
+ var bucketRegion = 'ap-southeast-1';
+ var IdentityPoolId = 'ap-southeast-1:600db6d0-66fb-4603-8183-2c24776d4734';
+
+ AWS.config.update({
+                region: bucketRegion,
+                credentials: new AWS.CognitoIdentityCredentials({
+                IdentityPoolId: IdentityPoolId
+                })
+            });
+
+            var s3 = new AWS.S3({
+                apiVersion: '2006-03-01',
+                params: {Bucket: bucketName}
+        });
+</script>
     
 </head>
 <body>
-    <!--- <input type="text" id="searchField" placeholder="search query">
-    <input type="submit" value="Submit form"> --->
+    <!-- A functional html code-->
+    <div>
+        <input type="file" id="fileUpload">
+    </div>
 
-    <!--- <button onclick="searchShow('athena')">Click me</button> --->
+    <div>
+    <button onclick="s3upload()">Submit</button>
+    </div>
+
+    <progress max=”100” value=”0”></progress>
+
+    <!-- Code For Search -->
 
     <input type="search" onsearch="searchShow(this.value)" id="a">
     <div id="app"></div>
@@ -17,15 +47,41 @@
     <p>
         results: <span id="d"></span><br />
         Text: <span id="b"></span><br />
+        
         URL : <a href="" id="e" target="_blank"></a>
         
         
     </p>
 
-    
+    <script type="text/javascript">
+        function s3upload() {  
+                var files = document.getElementById('fileUpload').files;
+                if (files) 
+                {
+                    var file = files[0];
+                    var fileName = file.name;
+                    var filePath = fileName;
+                    var fileUrl = 'https://' + 'bucketdemo112' + '.amazonaws.com/' +  filePath;
+            
+                    s3.upload({
+                                    Key: filePath,
+                                    Body: file,
+                                    ACL: 'public-read'
+                                }, function(err, data) {
+                                    if(err) {
+                                        reject('error');
+                                    }
+                                    
+                                    alert('Successfully Uploaded!');
+                                }).on('httpUploadProgress', function (progress) {
+                                    var uploaded = parseInt((progress.loaded * 100) / progress.total);
+                                    $("progress").attr('value', uploaded);
+                                });
+                }
+      };
 
-    <script>
-    function searchShow(a) {
+
+      function searchShow(a) {
     //a = "kendra"
     const url = 'https://vqtv2m1x1h.execute-api.ap-southeast-1.amazonaws.com/default/query?query=' + a;
     const abc = fetch(url)
@@ -38,9 +94,11 @@
 
     })
     .catch(error => {
-        document.querySelector('#d').innerText = "Not Found";    
+        document.querySelector('#d').innerText = data.Type;    
     });
 }
     </script>
+
+
 </body>
 </html>
