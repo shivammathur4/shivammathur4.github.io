@@ -1,6 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+        .container{
+    width: 100vw;
+    height: 100vh;
+
+}
+.header{
+    padding: 30px 0;
+
+    height: 80px;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    font-size: 60px;
+    font-style:inherit;
+
+}
+.task11{
+height: 30px;
+width:100%;
+color: brown;
+font-size: 40px;
+text-align: center;
+padding-top: 40px;
+
+}
+.task12{
+    text-align: center;
+    height: 40px;
+    width: 100%;
+    color: dodgerblue;
+    padding: 30px 0;
+}
+.task21{
+    text-align: center;
+    height: 100px;
+    width: 100%;
+    color: black;
+    
+    margin: auto;
+    font-size: 40px;
+    
+    
+}
+.task{
+    text-align: center;
+    padding: 0;
+    font-size: 30px;
+    height: 30px;
+    width: 100%;
+    color: brown;
+}
+.red{
+    color: red;
+    font-weight: bold;
+}
+.blue{
+    color: blue;
+    font-weight: bold;
+
+}
+#fileUpload{
+    height: 120px;
+}
+
+#a{
+    font-weight: bold;
+    height: 50px;
+    width: 400px;
+    padding: 30px 30px;
+}
+.green{
+    color: green;
+    font-weight: bold;
+}
+.yellow{
+    color: yellow;
+    font-weight: bold;
+}
+.search{
+    height: 100%;
+   width: 80%;
+    text-align: center;
+}
+.mid{
+    text-align: center;
+    font-size: 20px;  
+    
+
+}
+.search{
+    height: 50px;
+   margin-bottom: 100%;
+}
+    </style>
+    
+    
     <title>Fetch API</title>
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.357.0.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -27,32 +124,38 @@
     
 </head>
 <body>
-    <!-- A functional html code-->
-    <div>
-        <input type="file" id="fileUpload">
-    </div>
-
-    <div>
-    <button onclick="s3upload()">Submit</button>
-    </div>
-
-    <progress max=”100” value=”0”></progress>
-
+    <div class="container"> 
+        <div class="header"><span class="blue">Visionet Document Management System </span></div>
+           <!-- <div class="header"><span class="blue">Visionet Document Management System </span><span class="blue">i</span><span class="blue">s</span><span class="blue">i</span><span class="blue">o</span><span class="blue">n</span><span class="blue">e</span><span class="blue">t</span> <span class="green">D</span><span class="blue">o</span><span class="yellow">c</span><span class="green">u</span><span class="red">m</span><span class="blue">e</span><span class="yellow">n</span><span class="blue">t</span> <span class="blue">M</span><span class="green">a</span><span class="yellow">n</span><span class="red">a</span><span class="blue">g</span><span class="yellow">e</span><span class="green">m</span><span class="red">e</span><span class="green">n</span><span class="green">t</span> <span class="yellow">S</span><span class="red">y</span><span class="blue">s</span><span class="green">t</span><span class="yellow">e</span><span class="red">m</span></div>
+       -->
+<div class="task"></div>
     <!-- Code For Search -->
-
-    <input type="search" onsearch="searchShow(this.value)" id="a">
+    <div class="task21">    Search
+   <input type="search" height="60px" onsearch="searchShow(this.value)" id="a"> </div>
+    
     <div id="app"></div>
 
-    <h1>Query Search</h1>
-    <p>
-        results: <span id="d"></span><br />
+    
+    <div class="mid">
+        Results: <span id="d"></span><br />
         Text: <span id="b"></span><br />
         
         URL : <a href="" id="e" target="_blank"></a>
         
         
-    </p>
+    </div>
+        
 
+
+
+        <!-- A functional html code-->
+    <div class="task11">Upload a file </div>
+    <div class="task12"> 
+        <input type="file" id="fileUpload">
+        <button onclick="s3upload()" id="h1">Submit</button>
+    </div>
+
+   
     <script type="text/javascript">
         function s3upload() {  
                 var files = document.getElementById('fileUpload').files;
@@ -98,7 +201,6 @@
     });
 }
     </script>
-
-
+</div>
 </body>
 </html>
